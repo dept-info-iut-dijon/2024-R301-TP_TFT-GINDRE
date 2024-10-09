@@ -8,3 +8,8 @@ $loader->register();
 
 $loader->addNamespace('\Helpers', '/Helpers');
 $loader->addNamespace('\League\Plates', '/Vendor/Plates/src');
+$loader->addNamespace('\Controllers', '/Controllers');
+
+$mainController = new \Controllers\MainController();
+
+$mainController->index();
