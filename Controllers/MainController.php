@@ -11,7 +11,20 @@ class MainController
         $this->templates = new \League\Plates\Engine('Views');
     }
 
+    /**
+     * Affiche la page d'accueil
+     */
     public function index() : void {
-        echo $this->templates->render('home', ['tftSetName' => 'Remix Rumble']);
+        $unitDAO = new \Models\UnitDAO();
+        $units = $unitDAO->getAll();
+        $existingUnit = $unitDAO->getByID(1);
+        $nonExistingUnit = $unitDAO->getByID(1000);
+
+        echo $this->templates->render('home', [
+            'tftSetName' => 'Remix Rumble',
+            'units' => $units,
+            'existingUnit' => $existingUnit,
+            'nonExistingUnit' => $nonExistingUnit
+        ]);
     }
 }
