@@ -12,6 +12,5 @@ $loader->addNamespace('\Controllers', '/Controllers');
 $loader->addNamespace('\Config', '/Config');
 $loader->addNamespace('\Models', '/Models');
 
-$mainController = new \Controllers\MainController();
-
-$mainController->index();
+$router = new \Controllers\Router\Router();
+$router->routing($_GET, $_POST);
