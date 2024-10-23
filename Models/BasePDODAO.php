@@ -7,7 +7,7 @@ use PDOStatement;
 
 abstract class BasePDODAO
 {
-    private $pdo;
+    private PDO $pdo;
 
     protected function execRequest(string $sql, array $params = null) : PDOStatement|false {
         $stmt = $this->getDB()->prepare($sql);
@@ -17,7 +17,7 @@ abstract class BasePDODAO
 
     private function getDB() : PDO
     {
-        if ($this->pdo == null) {
+        if (!isset($this->pdo)) {
             $this->pdo = new PDO(\Config\Config::get('dsn'), \Config\Config::get('user'), \Config\Config::get('pass'));
         }
         return $this->pdo;
