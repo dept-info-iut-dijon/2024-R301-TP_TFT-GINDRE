@@ -13,18 +13,28 @@ class MainController
 
     /**
      * Affiche la page d'accueil
+     * @param string $message Message à afficher
      */
-    public function index() : void {
+    public function index(string $message = '') : void {
         $unitDAO = new \Models\UnitDAO();
         $units = $unitDAO->getAll();
-        $existingUnit = $unitDAO->getByID(1);
-        $nonExistingUnit = $unitDAO->getByID(1000);
 
         echo $this->templates->render('home', [
             'tftSetName' => 'Remix Rumble',
             'units' => $units,
-            'existingUnit' => $existingUnit,
-            'nonExistingUnit' => $nonExistingUnit
+            'message' => $message
+        ]);
+    }
+
+    /**
+     * Affiche la page de recherche
+     */
+    public function displaySearch() : void {
+        $unitDAO = new \Models\UnitDAO();
+        $columnNames = $unitDAO->getColumnNames();
+
+        echo $this->templates->render('search', [
+            'columnNames' => $columnNames
         ]);
     }
 }
