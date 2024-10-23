@@ -50,4 +50,20 @@ class UnitDAO extends BasePDODAO
 
         return $result;
     }
+
+    /**
+     * Récupère les noms des colonnes de la table UNIT
+     * @return array Les noms des colonnes
+     */
+    public function getColumnNames() : array {
+        $sql = 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "UNIT"';
+        $response = $this->execRequest($sql)->fetchAll();
+
+        $columnNames = [];
+        foreach ($response as $responseRow) {
+            $columnNames[] = $responseRow['COLUMN_NAME'];
+        }
+
+        return $columnNames;
+    }
 }
