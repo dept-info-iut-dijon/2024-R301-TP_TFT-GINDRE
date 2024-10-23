@@ -10,12 +10,7 @@
 </head>
 
 <body>
-<header>
-    <!-- Menu -->
-    <nav>
-
-    </nav>
-</header>
+<?php $this->insert('partials/topbar') ?>
 <!-- #contenu -->
 <main id="contenu" class="max-w-7xl px-4 mx-auto">
     <?=$this->section('content')?>
@@ -23,6 +18,8 @@
 <footer>
 
 </footer>
+
+<script src="public/js/main.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 $this->layout('template', ['title' => 'TP TFT']);
 
+
 $attack = [
     'True Damage',
     'True Damage',
@@ -9,6 +10,10 @@ $attack = [
 ?>
 <h1>TFT - Set <?= $this->e($tftSetName) ?></h1>
 
+<p class="mb-4 text-green-700">
+    <?= $this->e($message) ?>
+</p>
+
 <section class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
     <?php for ($i = 0; $i < count($units); $i++) { ?>
         <div>
@@ -16,11 +21,11 @@ $attack = [
                 <img class="aspect-[4/3] object-cover object-center z-0 size-full" src="<?= $this->e($units[$i]->getUrlImg()) ?>" alt="<?= $this->e($units[$i]->getName()) ?>">
                 <div class="absolute top-0 shadow-[inset_64px_0px_128px] shadow-black/60 left-0 w-full z-10 h-full flex flex-col justify-between">
                     <div class="p-2">
-                        <button>
+                        <a href="/?action=editUnit&id=<?= $this->e($units[$i]->getId()) ?>">
                             <span class="material-symbols-outlined text-amber-300">
                                 edit
                             </span>
-                        </button>
+                        </a>
                         <button>
                             <span class="material-symbols-outlined text-amber-300">
                                 delete
