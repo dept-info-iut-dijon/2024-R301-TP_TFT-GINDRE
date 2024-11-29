@@ -8,8 +8,15 @@ $origins = [];
         Add origin
     </h1>
 
-    <form>
-        <!-- Name, Cost, Origin, Img Url -->
+    <?php if (isset($message)): ?>
+        <p class="mb-4">
+            <?= $message ?>
+        </p>
+    <?php endif; ?>
+
+    <form method="post">
+        <input type="hidden" name="action" value="addUnitOrigin">
+
         <label class="label-input-group">
             <span>Name</span>
             <input type="text" name="name">
