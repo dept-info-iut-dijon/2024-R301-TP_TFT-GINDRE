@@ -29,12 +29,14 @@ class MainController
     /**
      * Affiche la page de recherche
      */
-    public function displaySearch() : void {
+    public function displaySearch(?array $units = null, ?string $message = null) : void {
         $unitDAO = new \Models\UnitDAO();
         $columnNames = $unitDAO->getColumnNames();
 
         echo $this->templates->render('search', [
-            'columnNames' => $columnNames
+            'columnNames' => $columnNames,
+            'units' => $units,
+            'message' => $message
         ]);
     }
 }
