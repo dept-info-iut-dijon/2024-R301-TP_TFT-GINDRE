@@ -7,7 +7,7 @@ class Unit
     private ?string $id;
     private string $name;
     private int $cost;
-    private string $origin;
+    private array $origin;
     private string $url_img;
 
     public function getId(): ?string
@@ -40,12 +40,12 @@ class Unit
         $this->cost = $cost;
     }
 
-    public function getOrigin(): string
+    public function getOrigin(): array
     {
         return $this->origin;
     }
 
-    public function setOrigin(string $origin): void
+    public function setOrigin(array $origin): void
     {
         $this->origin = $origin;
     }

@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Exception;
+
 class UnitController
 {
     private $templates;
@@ -11,26 +13,45 @@ class UnitController
         $this->templates = new \League\Plates\Engine('Views');
     }
 
-    public function displayAddUnit(): void {
-        echo $this->templates->render('add-unit');
+    public function displayAddUnit(?string $message = null): void {
+        $originDAO = new \Models\OriginDAO();
+        $origins = $originDAO->getAll();
+
+        echo $this->templates->render('upsert-unit', [
+            'origins' => $origins,
+            'message' => $message
+        ]);
     }
 
-    public function displayAddOrigin():void {
-        echo $this->templates->render('add-origin');
+    public function displayAddOrigin(?string $message = null):void {
+        echo $this->templates->render('add-origin', [
+            'message' => $message
+        ]);
     }
 
-    public function displayEditUnit(string $id): void
+    public function displayEditUnit(string $id, ?string $message = null): void
     {
         $unitDAO = new \Models\UnitDAO();
         $unit = $unitDAO->getByID($id);
 
-        echo $this->templates->render('add-unit', [
-            'unit' => $unit
+        $originDAO = new \Models\OriginDAO();
+        $origins = $originDAO->getAll();
+
+        echo $this->templates->render('upsert-unit', [
+            'unit' => $unit,
+            'origins' => $origins,
+            'message' => $message
         ]);
     }
 
-    public function deleteUnits()
+    /**
+     * @throws Exception If the unit is not found
+     */
+    public function deleteUnits(string $id): void
     {
-        header('Location: /?action=index&message=' . urlencode('Units deleted successfully'));
+        $unitDAO = new \Models\UnitDAO();
+        if ($unitDAO->deleteUnit($id) === 0) {
+            throw new Exception("Unit not found");
+        }
     }
 }

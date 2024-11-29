@@ -12,7 +12,13 @@ class RouteDelUnit extends Route
      */
     function get(array $params = []): void
     {
-        $this->controller->deleteUnits();
+        try {
+            $this->controller->deleteUnits($this->getParam($params, 'id', false));
+            $message = "Unit deleted successfully";
+        } catch (\Exception $e) {
+            $message = "Something went wrong: " . $e->getMessage();
+        }
+        header('Location: /?message=' . urlencode($message));
     }
 
     /**
