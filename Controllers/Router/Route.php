@@ -38,14 +38,17 @@ abstract class Route
      * @param bool $canBeEmpty If the parameter can be empty
      * @throws Exception If the parameter is empty or absent
      */
-    protected function getParam(array $array, string $paramName, bool $canBeEmpty=true): array
+    protected function getParam(array $array, string $paramName, bool $canBeEmpty=true): string | int | array
     {
+        $paramValue = '';
         if (isset($array[$paramName])) {
             if (!$canBeEmpty && empty($array[$paramName]))
                 throw new Exception("Paramètre '$paramName' vide");
-            return $array[$paramName];
-        } else
+            $paramValue = $array[$paramName];
+        } else if (!$canBeEmpty) {
             throw new Exception("Paramètre '$paramName' absent");
+        }
+        return $paramValue;
     }
 
     /**
